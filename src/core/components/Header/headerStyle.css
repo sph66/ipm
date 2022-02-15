@@ -1,0 +1,52 @@
+.header-container {
+    display: block;
+    height: 200px;
+    background-color: white;
+}
+
+.container-style {
+    padding-top: 50px;
+}
+
+.mower-logo {
+    height: 180px;
+    width: 285px;
+    padding-left: 50px;
+    padding-top: 10px;
+}
+
+.button-style {
+    height:40px;
+    width: 250px;
+    background-color: #ffffff;
+    text-align: center;
+    color: #357564;
+    cursor: pointer;
+    transition: 0.5s;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-30%);
+    border-radius: 10px;
+    border-color: #357564;
+}
+
+.button-style:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;  
+    top: 7px;
+    right: 30px;
+    transition: 0.5s;
+}
+  
+.button-style:hover{
+    padding-right: 24px;
+    padding-left:8px;
+}
+  
+.button-style:hover:after {
+    opacity: 1;
+    right: 15px;
+}
