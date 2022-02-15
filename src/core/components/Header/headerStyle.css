@@ -1,9 +1,7 @@
-
 .header-container {
     display: block;
     height: 200px;
     background-color: white;
-
 }
 
 .container-style {
@@ -52,4 +50,3 @@
     opacity: 1;
     right: 15px;
 }
-

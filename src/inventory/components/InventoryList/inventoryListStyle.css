@@ -1,16 +1,9 @@
 .list-style {
     display: block;
     background-color: rgb(230, 245, 230);
-    border-radius: 30px ;
-    font-size: 17px;
+    border-radius: 15px ;
+    font-size: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
-}
-
-.row-style > li {
-    padding: 7px;
-    margin: 7px;
-    background-color: rgb(193, 216, 200);
-    border-radius: 50px;
-    list-style-position: inside;
+    padding-left: 20px;
 }

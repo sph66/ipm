@@ -1,12 +1,11 @@
 import { Header } from '@/core/components';
-import { inventory } from '@/core/components'
-import InventoryListView from './inventory/components/InventoryList/InventoryListView';
+import { InventoryList } from '@/inventory/components';
 
-  function App() {
+function App() {
   return (
     <div>
       <Header />
-      <InventoryListView />
+      <InventoryList />
     </div>
   );
 }
