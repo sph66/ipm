@@ -1,1 +1,1 @@
-export { default } from './InventoryListView'
+export { default } from './InventoryListView';
