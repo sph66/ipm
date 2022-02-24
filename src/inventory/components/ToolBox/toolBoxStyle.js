@@ -1,24 +1,17 @@
-import styled from "styled-components";
 import { styled as muiStyled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
-
-export const Wrapper = styled.div`
-  // margin-right: 20px;
-  // height: 600px;
-  // padding-top: 15px;
-`;
 
 export const Search = muiStyled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.primary.light, 0.12),
+  backgroundColor: alpha(theme.palette.secondary.light, 0.12),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.primary.light, 0.25),
+    backgroundColor: alpha(theme.palette.secondary.light, 0.25),
   },
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
-    margin: `0 ${theme.spacing(3)}`,
+    margin: `0 ${theme.spacing(0)}`,
     width: "auto",
   },
 }));

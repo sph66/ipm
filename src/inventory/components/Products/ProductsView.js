@@ -19,15 +19,15 @@ const priceFormatCurrency = (params) => {
 };
 
 const columns = [
-  { field: "produs", headerName: "PRODUS", width: 350 },
-  { field: "data", headerName: "CANTITATE", width: 130 },
+  { field: "produs", headerName: "Produs", width: 350 },
+  { field: "data", headerName: "Cantitate", width: 130 },
   {
     valueGetter: priceFormatCurrency,
     field: "pret",
-    headerName: "PRET",
+    headerName: "Pret",
     width: 150,
   },
-  { valueGetter: formatCurrency, headerName: "TOTAL", width: 180 },
+  { valueGetter: formatCurrency, headerName: "Total", width: 180 },
 ];
 const rows = [
   {
@@ -59,52 +59,68 @@ export default function ProductsView() {
       <Grid item>
         <Card>
           <CardContent>
-            <DataGrid autoHeight columns={columns} rows={rows} sx={{ m: 2 }} />
+            <DataGrid
+              autoHeight
+              columns={columns}
+              rows={rows}
+              sx={{ border: 0 }}
+            />
+
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                padding: "0 10px",
+              }}
+            >
+              <Grid item>
+                <TextField
+                  id="outlined-basic"
+                  label="Produs"
+                  variant="standard"
+                  size="small"
+                  sx={{
+                    width: "340px",
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="outlined-basic"
+                  label="Cantitate"
+                  variant="standard"
+                  size="small"
+                  sx={{
+                    width: "110px",
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="outlined-basic"
+                  label="Pret"
+                  variant="standard"
+                  size="small"
+                  sx={{
+                    width: "130px",
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="outlined-basic"
+                  label="Total"
+                  variant="standard"
+                  size="small"
+                  sx={{
+                    width: "170px",
+                  }}
+                />
+              </Grid>
+            </Grid>
           </CardContent>
         </Card>
       </Grid>
-      <BottomContainer>
-        <Grid item>
-          <Card>
-            <CardContent>
-              <Grid container spacing={7}>
-                <Grid item>
-                  <TextField
-                    id="outlined-basic"
-                    label="Produs"
-                    variant="outlined"
-                    size="small"
-                  />
-                </Grid>
-                <Grid item>
-                  <TextField
-                    id="outlined-basic"
-                    label="Cantitate"
-                    variant="outlined"
-                    size="small"
-                  />
-                </Grid>
-                <Grid item>
-                  <TextField
-                    id="outlined-basic"
-                    label="Pret"
-                    variant="outlined"
-                    size="small"
-                  />
-                </Grid>
-                <Grid item>
-                  <TextField
-                    id="outlined-basic"
-                    label="Total"
-                    variant="outlined"
-                    size="small"
-                  />
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
-      </BottomContainer>
     </Grid>
   );
 }

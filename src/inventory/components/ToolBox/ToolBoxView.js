@@ -1,39 +1,38 @@
-import { AppBar, Box, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
-import {
-  Search,
-  SearchIconWrapper,
-  StyledInputBase,
-  Wrapper,
-} from "./toolBoxStyle";
+import { Search, SearchIconWrapper, StyledInputBase } from "./toolBoxStyle";
 
 export default function ToolBox() {
   return (
-    <Wrapper>
-      <Card>
-        <CardContent>
-          <Search>
-            {/* <Box
-            component="form"
-            sx={{
-              "& > :not(style)": { m: 3, width: "100%", height: "8ch" },
-            }}
-            autoComplete="off"
-          > */}
-            <TextField
-              disabled
-              fullWidth
-              id="total"
-              label="TOTAL"
-              placeholder="Total"
-              variant="filled"
-              size="small"
-            />
-            {/* </Box> */}
-          </Search>
+    <Card>
+      <CardContent>
+        <Box
+          sx={{
+            "& > :not(style)": { margin: "10px 0" },
+          }}
+          autoComplete="off"
+        >
+          <TextField
+            disabled
+            fullWidth
+            id="total"
+            label="Valoare totala"
+            placeholder="Total"
+            variant="standard"
+            size="small"
+          />
+          <TextField
+            disabled
+            fullWidth
+            id="produse"
+            label="Numar produse"
+            placeholder="Numar produse"
+            variant="standard"
+            size="small"
+          />
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -43,8 +42,8 @@ export default function ToolBox() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-        </CardContent>
-      </Card>
-    </Wrapper>
+        </Box>
+      </CardContent>
+    </Card>
   );
 }
