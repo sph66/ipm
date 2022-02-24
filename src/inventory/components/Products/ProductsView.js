@@ -1,5 +1,7 @@
 import { Box, Grid, Stack, TextField, Paper } from "@mui/material";
 import { DataGrid, gridColumnsMetaSelector } from "@mui/x-data-grid";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 
 import { BottomContainer } from "./productsStyle";
 
@@ -55,44 +57,52 @@ export default function ProductsView() {
   return (
     <Grid container direction="column" spacing={2}>
       <Grid item>
-        <DataGrid autoHeight columns={columns} rows={rows} sx={{ m: 2 }} />
+        <Card>
+          <CardContent>
+            <DataGrid autoHeight columns={columns} rows={rows} sx={{ m: 2 }} />
+          </CardContent>
+        </Card>
       </Grid>
       <BottomContainer>
         <Grid item>
-          <Grid container spacing={8}>
-            <Grid item>
-              <TextField
-                id="outlined-basic"
-                label="Produs"
-                variant="outlined"
-                size="small"
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="outlined-basic"
-                label="Cantitate"
-                variant="outlined"
-                size="small"
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="outlined-basic"
-                label="Pret"
-                variant="outlined"
-                size="small"
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="outlined-basic"
-                label="Total"
-                variant="outlined"
-                size="small"
-              />
-            </Grid>
-          </Grid>
+          <Card>
+            <CardContent>
+              <Grid container spacing={7}>
+                <Grid item>
+                  <TextField
+                    id="outlined-basic"
+                    label="Produs"
+                    variant="outlined"
+                    size="small"
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    id="outlined-basic"
+                    label="Cantitate"
+                    variant="outlined"
+                    size="small"
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    id="outlined-basic"
+                    label="Pret"
+                    variant="outlined"
+                    size="small"
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    id="outlined-basic"
+                    label="Total"
+                    variant="outlined"
+                    size="small"
+                  />
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
         </Grid>
       </BottomContainer>
     </Grid>

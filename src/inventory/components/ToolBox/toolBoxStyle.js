@@ -3,11 +3,9 @@ import { styled as muiStyled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 
 export const Wrapper = styled.div`
-  margin-right: 20px;
-  height: 600px;
-  padding-top: 15px;
-  border: 1px solid;
-  border-color: rgb(232, 227, 233);
+  // margin-right: 20px;
+  // height: 600px;
+  // padding-top: 15px;
 `;
 
 export const Search = muiStyled("div")(({ theme }) => ({
