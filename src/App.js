@@ -1,12 +1,15 @@
-import { Header } from '@/core/components';
-import { InventoryList } from '@/inventory/components';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import { HomePage, InventoryPage } from "@/inventory/pages";
 
 function App() {
   return (
-    <div>
-      <Header />
-      <InventoryList />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/inventory" element={<InventoryPage />} />
+      </Routes>
+    </Router>
   );
 }
 
