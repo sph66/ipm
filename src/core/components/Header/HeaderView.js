@@ -1,22 +1,31 @@
-import { Avatar, Grid } from '@mui/material';
+import { Avatar, Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 
-import logo from '@/assets/images/logo-mower2.png';
-import mama from '@/assets/images/mama1.jpg';
+import logo from "@/assets/images/logo-mower2.png";
+import mama from "@/assets/images/mama1.jpg";
 
-import './headerStyle.css';
+import { Button, Container, Mower } from "./headerStyle.js";
 
 export default function HeaderView() {
-    return (
-        <Grid container spacing={3} className="container-style">
-            <Grid item xs={3.5}>
-                <img src={logo} className="mower-logo" />
-            </Grid>
-            <Grid item xs={4.5}>
-                <Avatar alt="Mama" src={mama} sx={{ width: 200, height: 180 }} />
-            </Grid>
-            <Grid item xs={4} sx={{ position: 'relative' }}>
-                <button type="submit" text="Adauga invantar" className="button-style">Adauga inventar</button>
-            </Grid>
+  return (
+    <Container>
+      <Grid container spacing={3}>
+        <Grid item xs={3}>
+          <Mower>
+            <img src={logo} />
+          </Mower>
         </Grid>
-    );
+        <Grid item xs={3}>
+          <Avatar alt="Mama" src={mama} sx={{ width: 190, height: 170 }} />
+        </Grid>
+        <Grid item xs={6} sx={{ position: "relative" }}>
+          <Button>
+            <Link to="/inventory" text="Adauga invantar">
+              Adauga inventar
+            </Link>
+          </Button>
+        </Grid>
+      </Grid>
+    </Container>
+  );
 }
