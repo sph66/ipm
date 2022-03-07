@@ -1,59 +1,71 @@
 import { Box, Grid, Stack, TextField, Paper } from "@mui/material";
 import { DataGrid, gridColumnsMetaSelector } from "@mui/x-data-grid";
+import IconButton from "@mui/material/IconButton";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-import { BottomContainer } from "./productsStyle";
+import { parsePrice } from "./parsers";
 
 const formatCurrency = (params) => {
   return Intl.NumberFormat("ro-RO", {
     style: "currency",
     currency: "RON",
-  }).format(params.row.total);
+  }).format(parsePrice(params.row.pret) * parseFloat(params.row.cantitate));
 };
+
 const priceFormatCurrency = (params) => {
   return Intl.NumberFormat("ro-RO", {
     style: "currency",
     currency: "RON",
-  }).format(params.row.pret);
+  }).format(parsePrice(params.row.pret));
 };
 
-const columns = [
-  { field: "produs", headerName: "Produs", width: 350 },
-  { field: "data", headerName: "Cantitate", width: 130 },
-  {
-    valueGetter: priceFormatCurrency,
-    field: "pret",
-    headerName: "Pret",
-    width: 150,
-  },
-  { valueGetter: formatCurrency, headerName: "Total", width: 180 },
-];
-const rows = [
-  {
-    id: 1,
-    produs: "surub",
-    data: 7,
-    pret: 32,
-    total: 3456345,
-  },
-  {
-    id: 2,
-    produs: "cositoare",
-    data: 20,
-    pret: 21,
-    total: 5789234,
-  },
-  {
-    id: 3,
-    produs: "adapatoare",
-    data: 7,
-    pret: 4,
-    total: 7345234,
-  },
-];
+export default function ProductsView({
+  handleChangeAmount,
+  handleChangeProduct,
+  handleChangePrice,
+  handleEnter,
+  handleDeleteProduct,
+  updateProduct,
+  products,
+  total,
+  amount,
+  price,
+  product,
+}) {
+  const handleKeyUp = (e) => {
+    if (e.which == 13) {
+      handleEnter();
+    }
+  };
 
-export default function ProductsView() {
+  const formatIcon = (params) => {
+    console.log(params);
+    return (
+      <IconButton aria-label="delete">
+        <DeleteIcon
+          fontSize="small"
+          onClick={(e) => handleDeleteProduct(params.id)}
+        />
+      </IconButton>
+    );
+  };
+
+  const columns = [
+    { field: "produs", headerName: "Produs", width: 350, editable: true },
+    { field: "cantitate", headerName: "Cantitate", width: 130, editable: true },
+    {
+      valueGetter: priceFormatCurrency,
+      field: "pret",
+      headerName: "Pret",
+      width: 150,
+      editable: true,
+    },
+    { valueGetter: formatCurrency, headerName: "Total", width: 180 },
+    { field: "id", renderCell: formatIcon, headerName: "", width: 55 },
+  ];
+
   return (
     <Grid container direction="column" spacing={2}>
       <Grid item>
@@ -62,8 +74,9 @@ export default function ProductsView() {
             <DataGrid
               autoHeight
               columns={columns}
-              rows={rows}
+              rows={products}
               sx={{ border: 0 }}
+              onCellEditCommit={updateProduct}
             />
 
             <Grid
@@ -82,6 +95,9 @@ export default function ProductsView() {
                   sx={{
                     width: "340px",
                   }}
+                  value={product}
+                  onKeyUp={handleKeyUp}
+                  onChange={(e) => handleChangeProduct(e.target.value)}
                 />
               </Grid>
               <Grid item>
@@ -90,9 +106,13 @@ export default function ProductsView() {
                   label="Cantitate"
                   variant="standard"
                   size="small"
+                  type="number"
                   sx={{
                     width: "110px",
                   }}
+                  value={amount}
+                  onKeyUp={handleKeyUp}
+                  onChange={(e) => handleChangeAmount(e.target.value)}
                 />
               </Grid>
               <Grid item>
@@ -104,10 +124,15 @@ export default function ProductsView() {
                   sx={{
                     width: "130px",
                   }}
+                  type="number"
+                  value={price}
+                  onKeyUp={handleKeyUp}
+                  onChange={(e) => handleChangePrice(e.target.value)}
                 />
               </Grid>
               <Grid item>
                 <TextField
+                  disabled
                   id="outlined-basic"
                   label="Total"
                   variant="standard"
@@ -115,6 +140,7 @@ export default function ProductsView() {
                   sx={{
                     width: "170px",
                   }}
+                  value={total}
                 />
               </Grid>
             </Grid>

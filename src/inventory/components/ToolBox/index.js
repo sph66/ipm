@@ -1,1 +1,1 @@
-export { default } from "./ToolBoxView";
+export { default } from "./ToolBox";

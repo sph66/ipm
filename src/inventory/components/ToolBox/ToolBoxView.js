@@ -5,7 +5,11 @@ import CardContent from "@mui/material/CardContent";
 
 import { Search, SearchIconWrapper, StyledInputBase } from "./toolBoxStyle";
 
-export default function ToolBox() {
+export default function ToolBoxView({
+  total,
+  numberProd,
+  handleProductSearchOnChange,
+}) {
   return (
     <Card>
       <CardContent>
@@ -23,6 +27,7 @@ export default function ToolBox() {
             placeholder="Total"
             variant="standard"
             size="small"
+            value={total}
           />
           <TextField
             disabled
@@ -32,6 +37,7 @@ export default function ToolBox() {
             placeholder="Numar produse"
             variant="standard"
             size="small"
+            value={numberProd}
           />
           <Search>
             <SearchIconWrapper>
@@ -40,6 +46,9 @@ export default function ToolBox() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onChange={(e) => {
+                handleProductSearchOnChange(e.target.value);
+              }}
             />
           </Search>
         </Box>

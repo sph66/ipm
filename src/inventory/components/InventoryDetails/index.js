@@ -1,1 +1,1 @@
-export { default } from "./InventoryDetailsView";
+export { default } from "./InventoryDetails";
