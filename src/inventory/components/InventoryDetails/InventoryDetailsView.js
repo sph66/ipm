@@ -2,7 +2,14 @@ import { Box, TextField } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
-export default function InventoryDetails() {
+export default function InventoryDetailsView({
+  handleChangeTitle,
+  handleChangeObs,
+  handleChangeYear,
+  title,
+  year,
+  obs,
+}) {
   return (
     <Card>
       <CardContent>
@@ -18,6 +25,8 @@ export default function InventoryDetails() {
             variant="standard"
             size="small"
             fullWidth
+            value={title}
+            onChange={(e) => handleChangeTitle(e.target.value)}
           />
           <TextField
             id="outlined-basic"
@@ -25,6 +34,8 @@ export default function InventoryDetails() {
             variant="standard"
             size="small"
             fullWidth
+            value={year}
+            onChange={(e) => handleChangeYear(e.target.value)}
           />
           <TextField
             id="outlined-basic"
@@ -33,6 +44,8 @@ export default function InventoryDetails() {
             size="small"
             multiline
             fullWidth
+            value={obs}
+            onChange={(e) => handleChangeObs(e.target.value)}
           />
         </Box>
       </CardContent>
