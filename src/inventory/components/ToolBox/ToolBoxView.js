@@ -1,7 +1,10 @@
 import { Box, TextField } from "@mui/material";
+import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import IconButton from "@mui/material/IconButton";
+import DownloadIcon from "@mui/icons-material/Download";
 
 import { Search, SearchIconWrapper, StyledInputBase } from "./toolBoxStyle";
 
@@ -9,6 +12,8 @@ export default function ToolBoxView({
   total,
   numberProd,
   handleProductSearchOnChange,
+  handleDownloadInventory,
+  handleDownload,
 }) {
   return (
     <Card>
@@ -51,6 +56,26 @@ export default function ToolBoxView({
               }}
             />
           </Search>
+          <Box sx={{ "& > :not(style)": { m: 1 } }} padding="6px">
+            <Button
+              variant="contained"
+              color="success"
+              endIcon={<DownloadIcon />}
+              onClick={handleDownloadInventory}
+            >
+              Descarca Inventar
+            </Button>
+          </Box>
+          <Box sx={{ "& > :not(style)": { m: 1 } }} padding="6px">
+            <Button
+              variant="contained"
+              color="success"
+              endIcon={<DownloadIcon />}
+              onClick={handleDownload}
+            >
+              Descarca Centralizator
+            </Button>
+          </Box>
         </Box>
       </CardContent>
     </Card>

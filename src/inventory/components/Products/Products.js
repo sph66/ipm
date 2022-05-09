@@ -1,29 +1,32 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import ProductsView from "./ProductsView";
-import { parsePrice } from "./parsers";
+import { parsePrice } from "@/core/utils/parsers";
+import {
+  useAddProducts,
+  useGetInventory,
+  useDeleteProducts,
+  useUpdateProduct,
+} from "@/inventory/hooks";
 
 export default function Products() {
-  const [products, setProducts] = useState([]);
-
   const searchString = useSelector((state) => {
     return state.searchProduct.value;
   });
 
-  useEffect(() => {
-    const { products: items } = JSON.parse(localStorage.getItem("inventory"));
-    if (items) {
-      setProducts(
-        items.filter((item) => item.produs.indexOf(searchString) > -1)
-      );
-    }
-  }, [searchString]);
+  const params = useParams();
+
+  const inventory = useGetInventory(params.id, searchString);
 
   const [product, setProduct] = useState("");
   const [amount, setAmount] = useState("");
   const [price, setPrice] = useState("");
   const [total, setTotal] = useState("");
+  const addProducts = useAddProducts();
+  const deleteProduct = useDeleteProducts();
+  const updateProducts = useUpdateProduct();
 
   useEffect(() => {
     if (amount > 0 && price > 0) {
@@ -37,40 +40,22 @@ export default function Products() {
     if (!product || !(price > 0) || !(amount > 0)) {
       return;
     }
-    const inventory = JSON.parse(localStorage.getItem("inventory"));
+
     const anotherProduct = {
-      id:
-        inventory.products.reduce((maxId, { id }) => {
-          return Math.max(maxId, id);
-        }, 0) + 1,
       produs: product,
       cantitate: parseFloat(amount),
       pret: parseFloat(price),
       total: total,
     };
-    inventory.products.push(anotherProduct);
-    setProducts(inventory.products);
+
+    addProducts({ id: inventory.id, product: anotherProduct });
     setProduct("");
     setPrice("");
     setAmount("");
-    localStorage.setItem("inventory", JSON.stringify(inventory));
   };
-  console.log(product);
-  const updateProduct = (updatedData) => {
-    const inventory = JSON.parse(localStorage.getItem("inventory"));
-    for (let i = 0; i < inventory.products.length; i++) {
-      if (inventory.products[i].id == updatedData.id) {
-        let currentProduct = inventory.products[i];
-        currentProduct[updatedData.field] =
-          updatedData.field == "price"
-            ? parsePrice(updatedData.value)
-            : updatedData.value;
-        currentProduct.total =
-          parseFloat(currentProduct.pret) *
-          parseFloat(currentProduct.cantitate);
-      }
-    }
-    localStorage.setItem("inventory", JSON.stringify(inventory));
+
+  const updateProduct = (updateData) => {
+    updateProducts(updateData);
   };
 
   const handleEnter = () => {
@@ -90,14 +75,7 @@ export default function Products() {
   };
 
   const handleDeleteProduct = (deletedProductId) => {
-    const inventory = JSON.parse(localStorage.getItem("inventory"));
-    for (let i = 0; i < inventory.products.length; i++) {
-      if (inventory.products[i].id == deletedProductId) {
-        inventory.products.splice(i, 1);
-      }
-    }
-    setProducts(inventory.products);
-    localStorage.setItem("inventory", JSON.stringify(inventory));
+    deleteProduct(deletedProductId);
   };
 
   return (
@@ -105,7 +83,7 @@ export default function Products() {
       handleChangeAmount={handleChangeAmount}
       handleChangePrice={handleChangePrice}
       handleChangeProduct={handleChangeProduct}
-      products={products}
+      products={inventory?.products || []}
       total={total}
       handleEnter={handleEnter}
       handleDeleteProduct={handleDeleteProduct}

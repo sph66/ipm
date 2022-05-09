@@ -1,5 +1,4 @@
-import { Header } from "@/core/components";
-import { InventoryList } from "@/inventory/components";
+import { InventoryList, Header } from "@/inventory/components";
 
 export default function HomePage() {
   return (

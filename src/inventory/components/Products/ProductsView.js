@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { parsePrice } from "./parsers";
+import { parsePrice } from "@/core/utils/parsers";
 
 const formatCurrency = (params) => {
   return Intl.NumberFormat("ro-RO", {
@@ -41,7 +41,6 @@ export default function ProductsView({
   };
 
   const formatIcon = (params) => {
-    console.log(params);
     return (
       <IconButton aria-label="delete">
         <DeleteIcon
@@ -73,6 +72,7 @@ export default function ProductsView({
           <CardContent>
             <DataGrid
               autoHeight
+              pageSize={10}
               columns={columns}
               rows={products}
               sx={{ border: 0 }}
