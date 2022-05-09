@@ -4,7 +4,6 @@ export const parsePrice = (price) => {
   }
 
   if (typeof price != "string") {
-    console.log("aici pusca", price);
     return 0;
   }
 

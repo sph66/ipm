@@ -1,4 +1,11 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import {
+  useGetInventory,
+  useUpdateInventoryDetails,
+} from "../../hooks/inventoryHooks";
+import { updateInventoryDetails } from "../../services/inventoryService";
 import InventoryDetailsView from "./InventoryDetailsView";
 
 export default function InventoryDetails() {
@@ -6,10 +13,14 @@ export default function InventoryDetails() {
   const [year, setYear] = useState("");
   const [obs, setObs] = useState("");
 
+  const params = useParams();
+
+  const inventory = useGetInventory(params.id);
+
+  const updateInventoryDetails = useUpdateInventoryDetails();
+
   useEffect(() => {
-    const { an, observatii, titlu } = JSON.parse(
-      localStorage.getItem("inventory")
-    );
+    const { an, observatii, titlu } = inventory || {};
 
     if (an) {
       setYear(an);
@@ -20,18 +31,25 @@ export default function InventoryDetails() {
     if (titlu) {
       setTitle(titlu);
     }
-  }, []);
+  }, [inventory]);
 
   useEffect(() => {
     saveInventory();
   }, [title, year, obs]);
 
   const saveInventory = () => {
-    const inventory = JSON.parse(localStorage.getItem("inventory"));
-    inventory.titlu = title;
-    inventory.an = year;
-    inventory.observatii = obs;
-    localStorage.setItem("inventory", JSON.stringify(inventory));
+    if (!inventory?.id) {
+      return;
+    }
+
+    updateInventoryDetails({
+      inventoryId: inventory.id,
+      inventoryDetails: {
+        titlu: title,
+        an: year,
+        observatii: obs,
+      },
+    });
   };
 
   function handleChangeTitle(val) {
